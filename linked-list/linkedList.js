@@ -15,7 +15,7 @@ class LinkedList {
         this.tail = null;
     }
 
-    append (value) {
+    append (value) {//complexity O(1)
         const newNode = new LinkedListNode(value);
 
         if (!this.head || !this.tail) {
@@ -31,24 +31,7 @@ class LinkedList {
         return this;
     }
 
-    toArray () {
-        const nodes = [];
-
-        let currentNode = this.head;
-
-        while(currentNode) {
-            nodes.push(currentNode);
-            currentNode = currentNode.next;
-        }
-
-        return nodes;
-    }
-
-    toString () {
-        return this.toArray().map(node => node.toString()).toString();
-    }
-
-    prepend (value) {
+    prepend (value) {//complexity O(1)
         const newNode = new LinkedListNode(value, this.head);
 
         this.head = newNode;
@@ -60,7 +43,7 @@ class LinkedList {
         return this;
     }
 
-    find (value) {
+    find (value) {//complexity O(n)
 
         if(!this.head) {
             return null;
@@ -81,7 +64,7 @@ class LinkedList {
 
     }
 
-    delete (value) {
+    delete (value) {//complexity O(n)
 
         if(!this.head) {
             return null;
@@ -116,6 +99,41 @@ class LinkedList {
 
         return deletedNode;
 
+    }
+
+    insertAfter(value, prevNode) {//complexity O(n)
+        if (prevNode === null) {
+            return this;
+        }
+
+        const newNode = new LinkedListNode(value);
+
+        newNode.next = prevNode.next;
+
+        prevNode.next = newNode;
+
+        if (newNode.next === null) {
+            this.tail = newNode;
+        }
+
+        return this;
+    }
+
+    toArray () {//complexity O(n)
+        const nodes = [];
+
+        let currentNode = this.head;
+
+        while(currentNode) {
+            nodes.push(currentNode);
+            currentNode = currentNode.next;
+        }
+
+        return nodes;
+    }
+
+    toString () {//complexity O(n)
+        return this.toArray().map(node => node.toString()).toString();
     }
 }
 
